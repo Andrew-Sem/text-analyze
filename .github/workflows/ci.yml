@@ -28,7 +28,7 @@ jobs:
         run: bun test
 
       - name: Build
-        run: bun build ./index.ts --outdir ./dist
+        run: bun build --target=bun ./index.ts --outdir ./dist
 
       - name: Cache Bun dependencies
         uses: actions/cache@v3
