@@ -11,9 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      # Добавляем переменные окружения из GitHub Secrets
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      # Добавьте другие переменные окружения по необходимости
 
     steps:
       - uses: actions/checkout@v4
@@ -26,17 +24,12 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Create env file
-        run: |
-          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
-
       - name: Run tests
         run: bun test
 
       - name: Build
         run: bun build ./index.ts --outdir ./dist
 
-      # Опционально: кэширование зависимостей
       - name: Cache Bun dependencies
         uses: actions/cache@v3
         with:
